@@ -1,20 +1,15 @@
-/* 
-Your goal in this kata is to implement a difference function, which subtracts one list from another and returns the result.
+/* Given an array of integers your solution should find the smallest integer.
 
-It should remove all values from list a, which are present in list b keeping their order.
+For example:
 
-arrayDiff([1,2],[1]) == [2]
+Given [34, 15, 88, 2] your solution will return 2
+Given [34, -345, -1, 100] your solution will return -345
+You can assume, for the purpose of this kata, that the supplied array will not be empty. */
 
-If a value is present in b, all of its occurrences must be removed from the other:
+const args = [34, -345, -1, 100];
 
-arrayDiff([1,2,2,2,3],[2]) == [1,3]
- */
-
-const a = [1, 2, 2, 2, 3];
-const b = [2];
-
-function arrayDiff(a, b) {
-  return a.filter(element => !b.includes(element));
+function findSmallestInt(args) {
+  return args.sort((a, b) => a - b)[0];
 }
 
-console.log(arrayDiff(a, b));
+console.log(findSmallestInt(args));
