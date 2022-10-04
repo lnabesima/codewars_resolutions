@@ -1,15 +1,44 @@
-/* Given an array of integers your solution should find the smallest integer.
+/* Mr. Scrooge has a sum of money 'P' that he wants to invest. Before he does, he wants to know how many years 'Y' this sum 'P' has to be kept in the bank in order for it to amount to a desired sum of money 'D'.
 
-For example:
+The sum is kept for 'Y' years in the bank where interest 'I' is paid yearly. After paying taxes 'T' for the year the new sum is re-invested.
 
-Given [34, 15, 88, 2] your solution will return 2
-Given [34, -345, -1, 100] your solution will return -345
-You can assume, for the purpose of this kata, that the supplied array will not be empty. */
+Note to Tax: not the invested principal is taxed, but only the year's accrued interest
 
-const args = [34, -345, -1, 100];
+Example:
+  Let P be the Principal = 1000.00      
+  Let I be the Interest Rate = 0.05      
+  Let T be the Tax Rate = 0.18      
+  Let D be the Desired Sum = 1100.00
 
-function findSmallestInt(args) {
-  return args.sort((a, b) => a - b)[0];
+
+After 1st Year -->
+  P = 1041.00
+After 2nd Year -->
+  P = 1083.86
+After 3rd Year -->
+  P = 1128.30
+
+Thus Mr. Scrooge has to wait for 3 years for the initial principal to amount to the desired sum.
+
+Your task is to complete the method provided and return the number of years 'Y' as a whole in order for Mr. Scrooge to get the desired sum.
+
+Assumption: Assume that Desired Principal 'D' is always greater than the initial principal. However it is best to take into consideration that if Desired Principal 'D' is equal to Principal 'P' this should return 0 Years.*/
+
+const principal = 1000;
+const interest = 0.01625;
+const tax = 0.18;
+const desired = 1000;
+
+function calculateYears(principal, interest, tax, desired) {
+  if (principal === desired) return 0;
+  let counter = 0;
+
+  for (counter; desired >= principal; counter++) {
+    let accruedAfterTax = principal * interest - principal * interest * tax;
+    principal = principal + accruedAfterTax;
+  }
+
+  return counter;
 }
 
-console.log(findSmallestInt(args));
+console.log(calculateYears(principal, interest, tax, desired));
